@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Form 01</title>
+</head>
+<body>
+	<button>버튼1</button>
+	
+	<form action="form_check.jsp" method="post">
+		<input type="hidden" name="no" value="30">
+		이름 : <input type="text" name="nm" autofocus required> <br>
+		비밀번호 : <input type="password" name="pwd" value="1234"> <br>
+		주소 : <input type="search" name="addr" placeholder="주소를 입력하세요"> <br>
+		성별 : 남 <input type="radio" name="gender" value="male">
+			  여 <input type="radio" name="gender" value="female"> <br>
+	    좋아하는 운동 : 
+	    <input type="checkbox" name="fav_sports" value="pingpong">탁구
+	    <input type="checkbox" name="fav_sports" value="football">축구
+	    <input type="checkbox" name="fav_sports" value="golf">골프
+	    <input type="checkbox" name="fav_sports" value="swimming">수영<br>
+	    회비 : 
+		<input type="number" name="mon"><br>
+		부서 서택 : <select name="dept">
+			<option value="0000">부서를 선택하세요.</option>
+			<option value="100">기획부</option>
+			<option value="200">영업부</option>
+			<option value="300">개발부</option><br>
+		</select>
+		게시물 내용 :
+		<textarea rows="5" cols="60" name="content"></textarea>
+		<input type="submit" value="보내기">
+		<input type="reset" value="다시입력">
+	</form>
+
+</body>
+</html>

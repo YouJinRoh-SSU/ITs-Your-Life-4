@@ -1,0 +1,4 @@
+#banner{height: 70px;margin: 0 auto;}
+#banner{background: blue;}
+#banner{font-size: 30px; color: white;}
+#banner{display: flex;justify-content: center;align-items: center;}
