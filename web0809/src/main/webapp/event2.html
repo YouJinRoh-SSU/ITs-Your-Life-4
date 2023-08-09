@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	#result{
+		width:500px;
+		height:300px;
+		border:1px solid black;
+		font-size : 1000%;
+		text-align: center;
+	}
+</style>
+<script>
+	var count =0
+	function change_bg(color){
+		//querySelector : 대상 중 첫번째 단수를 뽑아내는 것
+		document.querySelector('#result').style.background = color
+		document.querySelector('#result').innerHTML=count++
+		
+	}
+	
+	function change_puple(){
+		change_bg('puple')
+	}//파라미터 없는 함수
+</script>
+</head>
+<body>
+	<a href="#" onclick="change_bg('green')">Green</a><br>
+	<a href="#" onclick="change_bg('orange')">Orange</a><br>
+	<a href="#" id="puple_a">Puple</a><br>
+	
+	<div id="result"></div>
+	
+	<script>
+		var pa = document.querySelector("#purple_a")
+		pa.onclick = change_puple//함수명. 괄호 제외, 파라미터없는 함수가 실행됨
+	</script>
+
+</body>
+</html>

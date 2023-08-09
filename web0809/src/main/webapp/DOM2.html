@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+</head>
+<body>
+	<button class="inc">증가</button>
+	<button class="dnc">감소</button>
+	<div id = "result"></div>
+	
+<script>
+	var count = 0;
+	function increase(){
+		count++
+		document.querySelector("#result").innerText = "<h1>"+ count +"</h1>"
+	}
+	function decrease(){
+		count--
+		document.querySelector("#result").innerHTML = "<h1>"+ count +"</h1>"
+	}
+	var btns = document.querySelectorAll("button.inc")//button태그 중 class가 inc인 것
+	for(let i =0; i<btns.length; i++){
+			btns[i].onclick = increase
+	}
+	var btns = document.querySelectorAll("button.dnc")//button태그 중 class가 inc인 것
+	for(let i =0; i<btns.length; i++){
+			btns[i].onclick = decrease
+	}
+</script>	
+</body>
+</html>

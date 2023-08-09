@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	window.onload = function(){
+		login_form.onsubmit = function(){
+			if(dument.querySelector("#mid").value == "")
+				return false
+			if(dument.querySelector("#mpwd").value == "")
+				return false
+			return true
+		}	
+	}	
+</script>
+</head>
+<body>
+	<form id="login_form" onsubmit="return check_form()">
+		아이디 : <input type="text" name="id" id="mid"><br>
+		비밀번호 : <input type="password" name="pwd" id="mpwd">
+		<input type="submit" value="로그인">
+	</form>
+</body>
+</html>
