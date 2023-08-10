@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>지뢰찾기</title>
+<style>
+	#fieldset {width: 420px;}
+	#field > button {width: 40px;height: 40px;}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<script>
+	function init_button(){//버튼 생성
+		let field = $("#field")//한번만 검색하도록 위에 위치해둠
+		//필드 내 모든 태그를 삭제
+		field.empty() //태그 내 모든 자식 삭제 //깨끗하게 새로운 게임
+		//10행 10열 반복
+		let html = "";
+        for(let row=1; row<=10; row++){
+            for(let col=1; col<=10; col++){
+                html += "<button data-row='"+row+"'"
+                html += " data-col='"+col+"'> ? </button>"
+            }//end col
+        }//end row
+        field.html(html)
+	}
+	function init_event(){
+		$("#field > button").click(function(){
+			let row = $(this).data("row") //자바스크립트의 객체 this를 $()에 넣으면 제이쿼리 객체가 됨
+			//data-xxx 속성 접근
+			let col = $(this).data("col")//data-xxx 속성 접근
+			$("#result").html("row="+row+"col="+col)
+			//지뢰 위치와 버튼 위치간의 직선 거리를 정수로 변환, ? 대신 거리를 출력
+			let len = Math.round(Math.sqrt(Math.pow(row-mine_row,2)+Math.pow(col-mine_col,2)))
+			$(this).html(len)
+			$(this).css("border","3px solid red")
+			if(len==0){//지뢰를 찾으면
+				alert("지뢰를 찾았습니다.")
+				init_mine()//새로운 좌표
+				init_button()//새로운 좌표 
+				init_event()
+			}
+		})
+	}
+	let mine_row= 0, mine_col =0;//지뢰 위치 
+	function init_mine(){//지뢰 위치 선정 
+		mine_row = Math.floor(Math.random()*10+1)//1~10
+		mine_col = Math.floor(Math.random()*10+1)//1~10
+	}
+	$(function(){
+		init_mine();//지뢰 위치 지정
+		init_button();
+		init_event();
+	})
+</script>
+</head>
+<body>
+	<h1>지뢰찾기</h1>
+	<div id="result"></div>
+	<fieldset>
+		<legend>지뢰밭</legend>
+		<div id="field"></div>
+	</fieldset>
+
+</body>
+</html>

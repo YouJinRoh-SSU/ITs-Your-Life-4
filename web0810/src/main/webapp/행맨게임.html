@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>단어 맞추기 게임</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+</head>
+<body>
+  <h1>단어 맞추기 게임</h1>
+  <div id="word"></div>
+  <div id="attempts">남은 기회: 7</div>
+  <div id="alphabetContainer"></div>
+  <div id="message"></div>
+
+  <script>
+    const words = [
+      "CHIMPANZEE",
+      "ELEPHANT",
+      "CHICKEN",
+      "BUTTERFLY",
+      "CROCODILE"
+    ];
+
+    let selectedWord = "";
+    let usedLetters = [];//사용한 알파벳
+    let attempts = 7;//남은 기회 계산
+
+    function startGame() {
+      selectedWord = words[Math.floor(Math.random() * words.length)];//임의로 단어 선택
+      usedLetters = [];
+      attempts = 7;//남은 횟수
+      updateWordDisplay();//사용자가 알파벳 눌러봄
+      updateAlphabetDisplay();//사용자가 누를 알파벳 버튼 만들기
+      $("#attempts").text(`남은 기회: ${attempts}`);
+    }
+
+    function updateWordDisplay() {
+      const wordDisplay = selectedWord.split("")
+        .map(letter => (usedLetters.includes(letter) ? letter : "_"))//사용자가 선택한 알파벳이 포함되어있는지 순회를 돌며 확인 
+        .join(" ");//있으면 알파벳, 없으면 그대로 _
+      $("#word").text(wordDisplay);
+    }
+
+    function updateAlphabetDisplay() {
+      const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      const alphabetContainer = $("#alphabetContainer");
+      alphabetContainer.empty();
+      
+      for (const letter of alphabet) {
+        const button = $("<button>")
+          .text(letter)
+          .click(() => handleLetterClick(letter))//사용자가 알파벳 버튼을 눌렀을 떄 handleLetterClick 실행
+          .prop("disabled", usedLetters.includes(letter) || attempts <= 0);
+          //이미 누른 알파벳 버튼은 비활성화 
+
+        alphabetContainer.append(button);
+      }
+    }
+
+    function handleLetterClick(letter) {
+      usedLetters.push(letter);//사용자가 클릿한 알파벳들 확인 
+      updateWordDisplay();
+      updateAlphabetDisplay();
+
+      if (!selectedWord.includes(letter)) {
+        attempts--;//알파벳을 누를 떄마다 남은 횟수 차감
+        $("#attempts").text(`남은 기회: ${attempts}`);
+        checkGameOver();
+      } else if ($("#word").text().indexOf("_") === -1) {
+        $("#message").text("축하합니다! 똑똑한 사람입니다.");
+        $("#alphabetContainer button").prop("disabled", true);
+      }
+    }
+
+    function checkGameOver() {//단어를 맞추지 못하고 게임이 끝났을 때
+      if (attempts <= 0) {
+        $("#message").text("당신은 바보입니까?");
+        $("#alphabetContainer button").prop("disabled", true);
+      }
+    }
+
+    $(document).ready(function() {
+      startGame();
+    });
+  </script>
+</body>
+</html>
